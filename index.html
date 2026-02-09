@@ -6,13 +6,16 @@
 <title>Forever Valentine</title>
 
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  background: linear-gradient(180deg, #ffd6e8, #ffeef6);
   font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #ffd6e8, #ffeef6);
   overflow: hidden;
 }
 
+/* Slides */
 .slide {
   display: none;
   position: absolute;
@@ -28,12 +31,14 @@ body {
   align-items: center;
 }
 
+/* Text */
 h1, h2, p {
   color: #7a2e4a;
 }
 
+/* Button */
 button {
-  margin-top: 30px;
+  margin-top: 25px;
   padding: 14px 28px;
   font-size: 18px;
   border: none;
@@ -42,54 +47,209 @@ button {
   color: white;
   cursor: pointer;
 }
+
+button:active { transform: scale(0.95); }
+
+/* Flower border */
+.border {
+  position: absolute;
+  inset: 12px;
+  border: 8px dotted #ff9ecf;
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.85;
+  animation: floatUp 9s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(110vh); }
+  to { transform: translateY(-10vh); }
+}
+
+/* Big clickable hearts */
+.big-heart {
+  font-size: 80px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+/* Flowers */
+.flower {
+  font-size: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* Cards */
+.card {
+  width: 150px;
+  height: 100px;
+  background: #fff0f6;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Fade-in text */
+.fade {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
 </style>
 </head>
 
 <body>
 
+<!-- Floating hearts generator -->
+<script>
+for (let i = 0; i < 35; i++) {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- SLIDE 1: Opening -->
 <div class="slide active">
+  <div class="border"></div>
   <h1>For My Forever Valentine 💖</h1>
   <p>This is something I made just for you</p>
   <button onclick="nextSlide()">Begin</button>
 </div>
 
+<!-- SLIDE 2: Tap hearts -->
 <div class="slide">
-  <h2>Tap the hearts 💗</h2>
-  <p>Each one means something</p>
+  <div class="border"></div>
+  <h2>Tap the hearts</h2>
+  <div>
+    <span class="big-heart" onclick="this.innerText='love'">💗</span>
+    <span class="big-heart" onclick="this.innerText='comfort'">💖</span>
+    <span class="big-heart" onclick="this.innerText='home'">💕</span>
+  </div>
   <button onclick="nextSlide()">Next</button>
 </div>
 
+<!-- SLIDE 3: Petal path -->
 <div class="slide">
-  <h2>You matter.</h2>
-  <p>More than you know.</p>
+  <div class="border"></div>
+  <h2>Follow the petals 🌸</h2>
+  <p>Tap them all</p>
+  <div>
+    <span class="flower" onclick="this.style.opacity=0.3">🌸</span>
+    <span class="flower" onclick="this.style.opacity=0.3">🌸</span>
+    <span class="flower" onclick="this.style.opacity=0.3">🌸</span>
+  </div>
+  <button onclick="nextSlide()">Continue</button>
+</div>
+
+<!-- SLIDE 4: Flip cards -->
+<div class="slide">
+  <div class="border"></div>
+  <h2>Flip the cards</h2>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+    <div class="card" onclick="this.innerText='Your smile'">Tap</div>
+    <div class="card" onclick="this.innerText='Your heart'">Tap</div>
+    <div class="card" onclick="this.innerText='Your soul'">Tap</div>
+  </div>
   <button onclick="nextSlide()">Next</button>
 </div>
 
+<!-- SLIDE 5: Glow affirmations -->
 <div class="slide">
+  <div class="border"></div>
+  <h2>Little reminders</h2>
+  <button onclick="this.innerText='You matter'">Tap me</button>
+  <button onclick="this.innerText='You are enough'">Tap me</button>
+  <button onclick="this.innerText='You are loved'">Tap me</button>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 6: Memory sparkles -->
+<div class="slide">
+  <div class="border"></div>
+  <h2>Little moments ✨</h2>
+  <p>The laughs. The late talks. The comfort.</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 7: Fill screen -->
+<div class="slide">
+  <div class="border"></div>
+  <h2>Fill this screen with love</h2>
+  <p>Tap anywhere 💗</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 8: Quiet moment -->
+<div class="slide">
+  <div class="border"></div>
   <h2>Pause here</h2>
   <p>You bring light into my life.</p>
+  <button onclick="nextSlide()">Continue</button>
+</div>
+
+<!-- SLIDE 9: Why you matter -->
+<div class="slide">
+  <div class="border"></div>
+  <h2 class="fade">Why you matter</h2>
+  <p class="fade" style="animation-delay:1s;">You show up.</p>
+  <p class="fade" style="animation-delay:2s;">You care deeply.</p>
+  <p class="fade" style="animation-delay:3s;">You stay.</p>
   <button onclick="nextSlide()">Next</button>
 </div>
 
+<!-- SLIDE 10: Almost there -->
 <div class="slide">
-  <h1>💖</h1>
-  <h2>
-    You are my forever, my safe place,  
-    and the reason I keep going.
-  </h2>
-  <p style="margin-top:25px;">
+  <div class="border"></div>
+  <h2>Almost there…</h2>
+  <p>This comes from my whole heart.</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- SLIDE 11: Pre-final -->
+<div class="slide">
+  <div class="border"></div>
+  <h2>Just one more thing</h2>
+  <p>Take a breath.</p>
+  <button onclick="nextSlide()">Final</button>
+</div>
+
+<!-- SLIDE 12: FINAL -->
+<div class="slide">
+  <div class="border"></div>
+  <h1>💗</h1>
+  <h2>You are my forever, my safe place, and my heart.</h2>
+  <p style="margin-top:25px;font-size:20px;">
     Happy Valentine’s Day, <strong>Aubree</strong> 💕
   </p>
 </div>
 
 <script>
-let currentSlide = 0;
+let current = 0;
 const slides = document.querySelectorAll(".slide");
 
 function nextSlide() {
-  slides[currentSlide].classList.remove("active");
-  currentSlide++;
-  slides[currentSlide].classList.add("active");
+  slides[current].classList.remove("active");
+  current++;
+  slides[current].classList.add("active");
 }
 </script>
 
