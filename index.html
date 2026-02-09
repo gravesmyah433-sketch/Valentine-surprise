@@ -216,32 +216,38 @@ for (let i = 0; i < 30; i++) {
 </div>
 
 <script>
-let current = 0;
-const slides = document.querySelectorAll(".slide");
+document.addEventListener("DOMContentLoaded", () => {
 
-function next() {
-  slides[current].classList.remove("active");
-  current++;
-  slides[current].classList.add("active");
-}
+  let current = 0;
+  const slides = document.querySelectorAll(".slide");
 
-function reveal(el) {
-  el.innerText = "❤️";
-}
+  window.next = function () {
+    if (current < slides.length - 1) {
+      slides[current].classList.remove("active");
+      current++;
+      slides[current].classList.add("active");
+    }
+  };
 
-function flower(el) {
-  el.style.opacity = 0.3;
-}
+  window.reveal = function (el) {
+    el.innerText = "❤️";
+  };
 
-document.addEventListener("click", e => {
-  if (slides[current].innerText.includes("sparkles")) {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    s.style.left = e.clientX + "px";
-    s.style.top = e.clientY + "px";
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), 800);
-  }
+  window.flower = function (el) {
+    el.style.opacity = 0.3;
+  };
+
+  document.addEventListener("click", e => {
+    if (slides[current].innerText.includes("sparkles")) {
+      const s = document.createElement("div");
+      s.className = "sparkle";
+      s.style.left = e.clientX + "px";
+      s.style.top = e.clientY + "px";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 800);
+    }
+  });
+
 });
 </script>
 
